@@ -106,13 +106,11 @@
                            <!--   <p class="text-center">By signing up you accept our <a href="#">Terms Of Use</a></p>-->
                            <!--</div>-->
                            <div class="col-md-12 text-center ">
-                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm"> {{ __('Login') }}</button>
+                              <button type="submit" class=" btn btn-block btn-primary tx-tfm"> {{ __('Login') }}</button>
                            </div>
                            <br>
-                           <br>
-                           <br>
                             <div class="col-md-12 text-center ">
-                              <a href="https://techsoul.farhangeneralstore.com.pk/" class=" btn btn-block mybtn btn-primary tx-tfm"> Go to main site</a>
+                              <a href="https://edkc.ewdsdev.co.uk/" class=" btn btn-block btn-primary tx-tfm"> Back to Home</a>
                            </div>
                            <div class="col-md-12 ">
                               <!--<div class="login-or">-->

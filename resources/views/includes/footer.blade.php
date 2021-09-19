@@ -1,9 +1,8 @@
   <!-- footer content -->
   <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-    
+    <div class="pull-right">
+      <a href="http://essexwebdesignstudio.com/" target="_blank">Website by EWDS</a>
+    </div>
+    <div class="clearfix"></div>
+  </footer>
+  <!-- /footer content -->
