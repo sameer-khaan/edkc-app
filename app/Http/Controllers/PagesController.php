@@ -490,17 +490,14 @@ public function add_puppiesview()
         $hash=Hash::make($request->password);
         if($hash==$password)
         {
-            
-        
-         $fr=DB::select(" UPDATE `user` SET `name`='".$request->name."',`surname`='".$request->surname."',`code`='".$request->code."',`phone`='".$request->phone."',`address`='".$request->address."',`town`='".$request->town."',`country`='".$request->country."',`postcode`='".$request->postcode."',`email`='".$request->email."',`type`='".$request->type."' WHERE `id`='".$id."' ");
-        return redirect()->action("PagesController@edit_profileview")->with("str",$fr);
-    }
-    
-    else
-    {
-        $e="sad";
-        return redirect()->action("PagesController@edit_profileview")->with("str1",$e);
-    }
+            $fr=DB::select(" UPDATE `user` SET `name`='".$request->name."',`surname`='".$request->surname."',`code`='".$request->code."',`phone`='".$request->phone."',`address`='".$request->address."',`town`='".$request->town."',`country`='".$request->country."',`postcode`='".$request->postcode."',`email`='".$request->email."',`type`='".$request->type."' WHERE `id`='".$id."' ");
+            return redirect()->action("PagesController@edit_profileview")->with("str",$fr);
+        }
+        else
+        {
+            $e="sad";
+            return redirect()->action("PagesController@edit_profileview")->with("str1",$e);
+        }
     
     }
     
@@ -509,6 +506,48 @@ public function add_puppiesview()
         $fr=DB::select(" SELECT * FROM `dog` WHERE `dog_id`='".$id."' ");
         return view("/pages/dog/edit")->with("dog",$fr);
     }
-     
-    
+
+    public function registrationview()
+    {
+        return view("pages/registration");
+
+    }
+
+    public function register(Request $request)
+    {
+        return print_r($request);
+        exit;
+        $name=$request->fname;
+        $srname=$request->srname;
+        $country=$request->country;
+        $postcode=$request->postcode;
+        $town=$request->town;
+        $phone=$request->phone;
+        $email=$request->email;
+        $username=$request->username;
+        $password=$request->password;
+        $re_password=$request->re_password;
+        $street_address=$request->street_address;
+        $country_code=$request->country_code;
+        
+        $check_email=DB::select(" SELECT * FROM `user` WHERE `email`='".$email."' ");
+        if(count($check_email)>0) {
+            return view("pages/registration")->with("exist",$check_email);
+        }
+        else
+        {
+            if($password==$re_password)
+            {
+                $pass=Hash::make($password);
+                DB::select(" INSERT INTO `user`(`username`, `password`, `name`, `surname`, `code`, `phone`, `address`, `town`, `country`, `postcode`,`email`) VALUES ('".$username."','".$pass."','".$name."','".$srname."','".$country_code."','".$phone."','".$street_address."','".$town."','".$country."','".$postcode."','".$email."') ");
+                $rt="asd";
+                return view("pages/registration")->with("su",$rt);
+            }
+            else
+            {
+                $rt="asd";
+                return view("pages/registration")->with("wr",$rt);
+            }
+        }
+    }
 }

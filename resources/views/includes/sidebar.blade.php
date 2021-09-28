@@ -2,9 +2,8 @@
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
               <a href="/" class="site_title">
-                  <!--<i class="fa fa-paw"></i> -->
-                  <img style="width:100px;height:100px;" src="{{ asset('images/logo.c3761255.svg')}}">
-                  </a>
+                <img style="width:65%;" src="{{ asset('images/logo.c3761255.svg')}}">
+              </a>
             </div>
 
             <div class="clearfix"></div>

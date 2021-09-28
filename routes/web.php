@@ -25,7 +25,6 @@ Route::post("/dna-results","PagesController@dna_results");
 Route::post("/show-results","PagesController@show_results");
 Route::post("/edit-dog","PagesController@edit_dog");
 
-
 Route::get("/add-litter","PagesController@add_litterview");
 Route::get("/litter-records","PagesController@litter_recordsview");
 Route::get("/register-new-litter","PagesController@register_new_litter");
@@ -38,16 +37,11 @@ Route::get("/delete-puppy/{id}","PagesController@delete_puppies");
 Route::get("/litters-puppies/{id}","PagesController@litters_puppies");
 Route::get("/litters-puppy/{id}","PagesController@litters_puppy");
 
-
 Route::post("/add-puppies","PagesController@add_puppies");
 Route::post("/litter-sell","PagesController@litter_sell_post");
 Route::post("/add-litter","PagesController@add_litter");
 
-
-
-
 Route::get("/change-of-ownership","PagesController@change_of_ownershipview");
-
 Route::get("/stud-enquiries","PagesController@stud_enquiriesview");
 Route::get("/litter-enquiries","PagesController@litter_enquiriesview");
 
@@ -59,20 +53,10 @@ Route::get("/delete-breed/{id}","PagesController@breed_delete");
 Route::post("/add-breed","PagesController@add_breed");
 Route::post("/update-breed","PagesController@breed_update");
 
-
 Route::get("/profile","PagesController@profileview");
 Route::get("/change-password","PagesController@changeview");
 Route::get("/edit-profile","PagesController@edit_profileview");
 Route::post("/change-password","PagesController@changepassword");
-
-
-
-
-
-
-
-
-
 
 //Admin
 Route::get("/user-records","AdminController@user_recordsview");
@@ -85,7 +69,10 @@ Route::post("/add-dam","AdminController@add_dam");
 Route::get("/add-sire","AdminController@add_sireview");
 Route::post("/add-sire","AdminController@add_sire");
 
+// Route::get("/registration","PagesController@registrationview");
 
 Auth::routes();
+
+Route::post("/register","PagesController@register");
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
