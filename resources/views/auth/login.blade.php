@@ -82,9 +82,11 @@ color: #ff0000;
     <div class="col-md-5 mx-auto">
       <div id="first">
         <div class="myform form ">
-            <div class="logo mb-3">
+            <div class="logo mt-4 mb-3">
               <div class="col-md-12 text-center">
-              <h1>Login</h1>
+              <img style="width:50%;" src="{{ asset('images/logo.c3761255.svg')}}">
+              <br><br>
+              <h2>Login</h2>
               </div>
           </div>
           <form method="POST" action="{{ route('login') }}">
@@ -118,9 +120,11 @@ color: #ff0000;
       </div>
       <div id="second">
         <div class="myform form ">
-          <div class="logo mb-3">
+          <div class="logo mt-4 mb-3">
               <div class="col-md-12 text-center">
-                <h1 >Signup</h1>
+                <img style="width:50%;" src="{{ asset('images/logo.c3761255.svg')}}">
+                <br><br>
+                <h2>Register</h2>
               </div>
           </div>
           <form method="POST" action="/register" name="registration">
