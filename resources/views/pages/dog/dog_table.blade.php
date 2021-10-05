@@ -71,6 +71,7 @@ Dog Deleted successfully.
               <th>Colour</th>
               <th>Sex</th>
               <th>Actions</th>
+              <th>Pedigree</th>
              
             </tr>
           </thead>
@@ -109,6 +110,7 @@ Dog Deleted successfully.
               ?>
               <td><a href="/view/{{$dd->dog_id}}" ><i class="fa fa-eye"></i>&nbsp;&nbsp;&nbsp;<a onclick="return confirm('Are you sure want to delete this?');" href="/delete-dog/{{$dd->dog_id}}" ><i class="fa fa-times"></i></a>
               </td>
+              <td><a href="{{url('pedigree/'.$dd->dog_id)}}" class="btn btn-light"><i class="fas fa-sitemap"></i></a></td>
             
             </tr>
 

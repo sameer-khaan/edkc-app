@@ -22,7 +22,74 @@ class PagesController extends Controller
 
     public function add_dogview()
     {
-        return view("pages/dog/dog");
+        $id = Auth::id();
+        $dogs=DB::select("SELECT * FROM `dog` WHERE `user_id`='".$id."' ");
+        return view("pages/dog/dog",['dogs'=>$dogs]);
+    }
+
+    public function pedigree($dog_id){
+        /* Child*/
+        $child=DB::select("SELECT * FROM `dog` WHERE `dog_id`='$dog_id'");
+        $child_name = $child[0]->name;
+        $child_sex = $child[0]->sex;
+        
+        /* parents of child */
+        $male_p_id = $child[0]->male_parent;
+        $female_p_id = $child[0]->female_parent;
+        $male_p_name = '';
+        $female_p_name = '';
+        $p_male_male_p_id = '';
+        $p_male_female_p_id = '';
+        $p_male_male_name = '';
+        $p_male_female_name = '';
+        $p_female_male_p_id = '';
+        $p_female_female_p_id = '';
+        $p_female_male_name = '';
+        $p_female_female_name = '';
+        if($male_p_id!='no'){
+            $male_parent=DB::select("SELECT * FROM `dog` WHERE `dog_id`='$male_p_id'");
+            $male_p_name = $male_parent[0]->name;
+        }
+        if($female_p_id!='no'){
+            $female_parent=DB::select("SELECT * FROM `dog` WHERE `dog_id`='$female_p_id'");
+            $female_p_name = $female_parent[0]->name;
+        }
+        
+        /* Parents of child parents */
+        if($male_p_id!='no'){
+            $p_male_male_p_id = $male_parent[0]->male_parent;
+            $p_male_female_p_id = $male_parent[0]->female_parent;
+            if($p_male_male_p_id!='no'){
+                $p_male_male_p=DB::select("SELECT * FROM `dog` WHERE `dog_id`='$p_male_male_p_id'");
+                $p_male_male_name = $p_male_male_p[0]->name;
+            }
+            if($p_male_female_p_id!='no'){
+                $p_male_female_p=DB::select("SELECT * FROM `dog` WHERE `dog_id`='$p_male_female_p_id'");
+                $p_male_female_name = $p_male_female_p[0]->name;
+            }
+        }
+        if($female_p_id!='no'){
+            $p_female_male_p_id = $female_parent[0]->male_parent;
+            $p_female_female_p_id = $female_parent[0]->female_parent;
+            if($p_female_male_p_id!='no'){
+                $p_female_male_p=DB::select("SELECT * FROM `dog` WHERE `dog_id`='$p_female_male_p_id'");
+                $p_female_male_name = $p_female_male_p[0]->name;
+            }
+            if($p_female_female_p_id!='no'){
+                $p_female_female_p=DB::select("SELECT * FROM `dog` WHERE `dog_id`='$p_female_female_p_id'");
+                $p_female_female_name = $p_female_female_p[0]->name;
+            }
+        }
+        return view("pages/dog/pedigree",compact(
+            'child_name',
+            'child_sex',
+            'male_p_name',
+            'female_p_name',
+            'p_male_male_name',
+            'p_male_female_name',
+            'p_female_male_name',
+            'p_female_female_name'
+        ));
     }
     public function changeview()
     {
@@ -63,7 +130,7 @@ class PagesController extends Controller
     public function edit_dog(Request $request)
     {
         $name=$request->dog_name;
-          $dob=$request->dob;
+        $dob=$request->dob;
         $colour=$request->colour;
         $micro=$request->micro;
         $breed_license_number=$request->breed_license_number;
@@ -78,16 +145,15 @@ class PagesController extends Controller
       
          if(!empty($_FILES["pedigree_img"]['name']))
          {
-         $six_digit_random_number = mt_rand(100000, 999999);
-   $filename=$_FILES["pedigree_img"]['name'];
-    $tempname=$_FILES["pedigree_img"]["tmp_name"];
-    $file_ext=pathinfo($filename,PATHINFO_EXTENSION);
-    $filename=pathinfo($filename,PATHINFO_FILENAME);
-    $filename=$six_digit_random_number;
-    $name=$filename.".".$file_ext;
-
-$folder="pedigree_img/".$name; 
-move_uploaded_file($tempname, $folder);
+            $six_digit_random_number = mt_rand(100000, 999999);
+            $filename=$_FILES["pedigree_img"]['name'];
+            $tempname=$_FILES["pedigree_img"]["tmp_name"];
+            $file_ext=pathinfo($filename,PATHINFO_EXTENSION);
+            $filename=pathinfo($filename,PATHINFO_FILENAME);
+            $filename=$six_digit_random_number;
+            $name=$filename.".".$file_ext;
+            $folder="pedigree_img/".$name; 
+            move_uploaded_file($tempname, $folder);
          }        
          else
          {
@@ -97,7 +163,7 @@ move_uploaded_file($tempname, $folder);
         $cross_breed=$request->crossbread;
         $dog_name=$request->dog_name;
         
-          $user_id = Auth::id();
+        $user_id = Auth::id();
         $sex=$request->sex;
         $bg=DB::select(" SELECT MAX(dog_id) AS 'd_iid' FROM `dog` ");
         foreach($bg as $fds)
@@ -143,11 +209,9 @@ move_uploaded_file($tempname, $folder);
        
         $within=$request->within;
         $quantity=$request->quantity;
-      $id = Auth::id();
-    DB::select(" INSERT INTO `dog`(`dog_id`,`user_id`,`name`, `dob`, `breed`, `cross_breed`, `colour`, `microchip_number`, `breeding_license_number`, `restrictions`, `pedigree`, `pedigree_img`, `add`, `qty`,`sex`) VALUES ('".($ghy+1)."','".$id."','".$dog_name."','".$dob."','".$breed_id."','".$cross_breed."','".$colour."','".$micro."','".$breed_license_number."','".$restrictions."','".$pedigree."','".$folder."','".$within."','".$quantity."','".$sex."') ");
-    
-    return view("pages/dog/dog")->with("suc",$quantity);
-    
+        $id = Auth::id();
+        DB::select(" INSERT INTO `dog`(`dog_id`,`user_id`,`name`, `dob`, `breed`, `cross_breed`, `colour`, `microchip_number`, `breeding_license_number`, `restrictions`, `pedigree`, `pedigree_img`, `add`, `qty`,`sex`) VALUES ('".($ghy+1)."','".$id."','".$dog_name."','".$dob."','".$breed_id."','".$cross_breed."','".$colour."','".$micro."','".$breed_license_number."','".$restrictions."','".$pedigree."','".$folder."','".$within."','".$quantity."','".$sex."') ");
+        return view("pages/dog/dog")->with("suc",$quantity);
     }
     public function upload_img(Request $request)
     {

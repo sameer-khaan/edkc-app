@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::get("/","PagesController@index");
 Route::get("/add-dog","PagesController@add_dogview");
 Route::get("/dog-records","PagesController@dog_recordsview");
+Route::get("/pedigree/{id}","PagesController@pedigree");
 Route::post("/add-dog","PagesController@add_dog");
 Route::get("/delete-dog/{id}","PagesController@delete_dog");
 Route::get("/edit-dog/{id}","PagesController@edit_dogview");
