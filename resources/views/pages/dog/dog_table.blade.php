@@ -70,9 +70,8 @@ Dog Deleted successfully.
               <th>Date of Birth</th>
               <th>Colour</th>
               <th>Sex</th>
-              <th>Actions</th>
               <th>Pedigree</th>
-             
+              <th>Actions</th>
             </tr>
           </thead>
 
@@ -81,7 +80,7 @@ Dog Deleted successfully.
             		@foreach($dog as $dd)		
             <tr>
               <td>{{$dd->dog_id}}</td>
-              <td>{{$dd->name}}</td>
+              <td><a href="/view/{{$dd->dog_id}}">{{$dd->name}}</a></td>
               <?php
               $sc=DB::select(" SELECT * FROM `breed` WHERE `breed_id`='".$dd->breed."'");
               foreach($sc as $eds)
@@ -89,7 +88,7 @@ Dog Deleted successfully.
                   $name=$eds->name;
               }
               ?>
-              <td>{{$name}}</td>
+              <td>{{$name ?? ''}}</td>
               <td>{{$dd->dob}}</td>
               <td>{{$dd->colour}}</td>
               <?php
@@ -108,10 +107,9 @@ Dog Deleted successfully.
               <?php
               }
               ?>
-              <td><a href="/view/{{$dd->dog_id}}" ><i class="fa fa-eye"></i>&nbsp;&nbsp;&nbsp;<a onclick="return confirm('Are you sure want to delete this?');" href="/delete-dog/{{$dd->dog_id}}" ><i class="fa fa-times"></i></a>
-              </td>
               <td><a href="{{url('pedigree/'.$dd->dog_id)}}" class="btn btn-light"><i class="fas fa-sitemap"></i></a></td>
-            
+              <td><a href="/view/{{$dd->dog_id}}"><i class="fa fa-eye"></i>&nbsp;&nbsp;&nbsp;<a onclick="return confirm('Are you sure want to delete this?');" href="/delete-dog/{{$dd->dog_id}}" ><i class="fa fa-times"></i></a>
+              </td>
             </tr>
 
             @endforeach

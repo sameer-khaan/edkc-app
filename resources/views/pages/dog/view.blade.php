@@ -171,7 +171,8 @@
                                         </td>
                                 </tr>
                                 <tr>
-                                    <td>Breed</td><td>
+                                    <td>Breed</td>
+                                    <td>
                                         <?php
                                         $erw=DB::select(" SELECT * FROM `breed` WHERE `breed_id`='".$dd->breed."' ");
                                         foreach($erw as $rft)
@@ -179,9 +180,8 @@
                                             $name=$rft->name;
                                         }
                                         ?>
-                                        {{$name}}
-                                        
-                                        </td>
+                                        {{$name ?? ''}}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Colour</td><td>{{$dd->colour}}</td>

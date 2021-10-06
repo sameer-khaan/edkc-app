@@ -579,8 +579,6 @@ public function add_puppiesview()
 
     public function register(Request $request)
     {
-        return print_r($request);
-        exit;
         $name=$request->fname;
         $srname=$request->srname;
         $country=$request->country;

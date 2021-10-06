@@ -97,7 +97,7 @@ Dog Deleted successfully.
                   $name=$eds->name;
               }
               ?>
-              <td>{{$name}}</td>
+              <td>{{$name ?? ''}}</td>
               <td>{{$dd->dob}}</td>
               <td>{{$dd->colour}}</td>
               <?php

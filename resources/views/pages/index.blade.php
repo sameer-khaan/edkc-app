@@ -54,7 +54,6 @@
       </div>
 
 
-
     <br />
     <div class="row">
         <div class="col-md-12">
@@ -69,6 +68,7 @@
               <div class="row">
                   @foreach($dog as $dd)
                 <div class="col-md-55">
+                <a href="/view/{{$dd->dog_id}}">
                   <div class="thumbnail">
                     <div class="image view view-first">
                       <img style="width: 100%; display: block;" src="images/media1.jpg" alt="image" />
@@ -85,6 +85,7 @@
                       <p>{{$dd->name}}</p>
                     </div>
                   </div>
+                </a>
                 </div>
                 @endforeach
              
